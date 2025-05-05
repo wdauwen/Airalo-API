@@ -2,8 +2,8 @@ import requests
 
 BASE_URL = "https://sandbox-partners-api.airalo.com"
 
-CLIENT_ID = "7e29e2facf83359855f746fc490443e6"
-CLIENT_SECRET = "e5NNajm6jNAzrWsKoAdr41WfDiMeS1l6IcGdhmbb"
+CLIENT_ID = "<the-ID-from-assignment-documentation>"
+CLIENT_SECRET = "<the-secret-from-assignment-documentation"
 
 def get_bearer_token():
 	url = f"{BASE_URL}/v2/token"
