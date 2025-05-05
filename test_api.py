@@ -10,16 +10,24 @@ def test_api_flow():
 	order_response= submit_order(token, quantity = 6, package_id ="merhaba-7days-1gb")
 	assert order_response.status_code == 200
 
+	created_at = order_response.json()["data"]["created_at"]
+
 	# Get the sim cards
-	esims_response = get_esims(token)
+	esims_response = get_esims(token, with_order=True, created_at=created_at)
 	assert esims_response.status_code == 200
 
-	first_item = esims_response["data"][0]
-	simable = first_item["simable"]
+	orders = esims_response.json()["data"]
 
-	assert simable["quantity"] == 6
-	assert simable["package"] == "merhaba-7days-1gb"
-	assert simable["data"] == "1 GB"
-	assert simable["price"] == "4.5"
+	for order in orders:
+		if order["created_at"] != created_at:
+			continue
+
+		first_item = orders[0]
+		simable = first_item["simable"]
+
+		assert simable["quantity"] == 6
+		assert simable["package"] == "Merhaba-1 GB - 7 Days"
+		assert simable["data"] == "1 GB"
+		assert simable["price"] == "4.5"
 
 

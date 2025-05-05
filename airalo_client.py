@@ -38,10 +38,15 @@ def submit_order(token, quantity, package_id, order_type=None, description=None,
 	response.raise_for_status()
 	return response
 
-def get_esims(token):
+def get_esims(token, with_order=False, created_at=None):
 	url=f"{BASE_URL}/v2/sims"
+	params = {}
+	if with_order:
+		params["include"] = "order"
+	if created_at:
+		params["filter[created_at]"] = f"{created_at} - {created_at}"
 	headers = {"Authorization": f"Bearer {token}"}
-	response = requests.get(url, headers=headers)
+	response = requests.get(url, headers=headers, params=params)
 	response.raise_for_status()
 	return response
 
