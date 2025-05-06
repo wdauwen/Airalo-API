@@ -5,7 +5,7 @@
 - clone the repo: `git clone <repo url>`
 - cd into the repo
 - Make sure Pytest is installed, if not `pip install -r requirements.txt`
-- run `python -m pytest test_api.py -v -s
+- run `python -m pytest test_api.py -v -s`
 
 ## Rationale / open questions / thoughts
 I could not find an easy way to link an id from the submit order response to tie to the get esim list request therefore I attempted to use the filter on "created at" however this has a flaw:
